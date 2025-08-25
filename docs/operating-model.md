@@ -1,7 +1,7 @@
 # Operating Model v1.0
 ## Branching
 - Hauptzweig: `main` (geschützt)
-- Arbeitszweige: `feat/*`, `fix/*`, `chore/*`
+- Arbeitszweige: `feat/*`, `fix/*`, `chore/*`, `docs/*`
 - Merge nur via PR (mind. 1 Review – Solo: Selbstreview)
 
 ## CI/CD
