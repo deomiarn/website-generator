@@ -1,4 +1,4 @@
-[//]: # (10 – Contributing & Coding Standards)
+[//]: # (09 – Contributing & Coding Standards)
 
 [//]: # (Zweck: Verbindliche Arbeitsnormen für Code und PRs.)
 
