@@ -1,15 +1,19 @@
 [//]: # (03 – Requirements)
+
 [//]: # (Zweck: Definiert, was das System können muss – fachlich und qualitativ.)
+
 [//]: # (Inhalt: Funktionale Anforderungen, nicht-funktionale Anforderungen, Akzeptanzkriterien.)
+
 [//]: # (Done: Jedes Requirement ist testbar oder durch ein Akzeptanzkriterium messbar.)
-# Requirements
 
 ## Funktionale Anforderungen
+
 R1: Eine Sitemap mit KI generieren lassen nach Benutzereingabe (Um was für eine Website handelt es sich?).
 
 R2: Eine Sitemap einlesen und in Seitenstruktur (Wireframe) umwandeln.
 
-R3: Vordefinierte Sections in Wireframe automatisch mappen (z. B. Hero, Features, Pricing, FAQ, Testimonials, Team, CTA, Contact, Stats, Steps, Gallery, Footer).
+R3: Vordefinierte Sections in Wireframe automatisch mappen (z. B. Hero, Features, Pricing, FAQ, Testimonials, Team, CTA,
+Contact, Stats, Steps, Gallery, Footer).
 
 R4: Globale Design-Tokens anwenden (Farben, Schriftarten, Radius).
 
@@ -21,9 +25,10 @@ R7: Ein Next.js-Projekt mit Tailwind, shadcn und Routing erzeugen.
 
 R8: `sitemap.xml` und `robots.txt` automatisch generieren.
 
-R9: Export des Projekts als ZIP mit Vercel-Konfiguration. 
+R9: Export des Projekts als ZIP mit Vercel-Konfiguration.
 
-R10: KI-Assist in jedem Schritt (Sitemap, Wireframe, Text), für effiziente und benutzerspezifische Lösungen, die auf die Promps und Keywords passen.   
+R10: KI-Assist in jedem Schritt (Sitemap, Wireframe, Text), für effiziente und benutzerspezifische Lösungen, die auf die
+Promps und Keywords passen.
 
 R11: Deploytes System mit Authentifizierung, damit nur ich den Generator nutzen kann.
 
@@ -33,14 +38,18 @@ R13: Vorhandene UI, um Sections auszuwählen, Design-Tokens anzupassen und Keywo
 
 R14: Responsives Design für mobile, tablet und desktop.
 
+R15: Ein hochgeladenes Bild wird automatisch in mehreren Auflösungen und Formaten optimiert und im Export korrekt
+eingebunden (SEO-freundlich, `next/image` oder `<picture>`).
+
 ## Nicht-funktionale Anforderungen
+
 N1: Sauberer Code mit ESLint & Prettier.
 
-N2: TypeScript strict mode aktiv.  
+N2: TypeScript strict mode aktiv.
 
 N3: Generationszeit ≤ 30 Sekunden pro Task.
 
-N4: Developer Experience: ≤ 5 Befehle bis zur lauffähigen Demo.  
+N4: Developer Experience: ≤ 5 Befehle bis zur lauffähigen Demo.
 
 N5: Tests vorhanden (Unit + Integration).
 
@@ -55,17 +64,20 @@ N7: Für MVP kann nur eine Person (deomiarn) auf das Programm zugreifen.
 **R1 – KI generiert Sitemap nach Benutzereingabe**  
 Given ein Prompt mit Website-Typ und Kerninhalten.  
 When ich „Sitemap generieren“ ausführe.  
-Then entsteht eine YAML/JSON-Sitemap mit mindestens Startseite, einer Content-Seite und einer Kontaktseite, die editierbar ist.
+Then entsteht eine YAML/JSON-Sitemap mit mindestens Startseite, einer Content-Seite und einer Kontaktseite, die
+editierbar ist.
 
 **R2 – Sitemap einlesen → Seitenstruktur (Wireframe) mit Sections**  
 Given eine gültige `sitemap.yml` oder `sitemap.json`.  
 When ich den Import starte.
-Then werden pro Eintrag die vordefinierten Section-Components für Seiten und ihre Reihenfolge erzeugt und als Wireframe darstellbar.
+Then werden pro Eintrag die vordefinierten Section-Components für Seiten und ihre Reihenfolge erzeugt und als Wireframe
+darstellbar.
 
 **R3 – Sections manuell anpassen**  
 Given eine importierte Seitenstruktur mit Sections.  
 When ich „CRUD Sections“ ausführe.  
-Then werden passende Section-Components empfohlen mit der man die aktuelle Section ersetzen, hinzufügen oder löschen kann.
+Then werden passende Section-Components empfohlen mit der man die aktuelle Section ersetzen, hinzufügen oder löschen
+kann.
 
 **R4 – Globale Design-Tokens anwenden**  
 Given eine Token-Konfiguration mit Farben, Schriftarten, Radius.  
@@ -85,7 +97,8 @@ Then erhalte ich pro Section einen kurzen, thematisch passenden Text, der editie
 **R7 – Next.js + Tailwind + shadcn + Routing erzeugen**  
 Given ein Projektzielverzeichnis.  
 When ich „Projekt exportieren“ ausführe.  
-Then entsteht ein lauffähiges Next.js 14 Projekt mit Tailwind und shadcn/ui, inkl. Dateirouting entsprechend der Sitemap.
+Then entsteht ein lauffähiges Next.js 14 Projekt mit Tailwind und shadcn/ui, inkl. Dateirouting entsprechend der
+Sitemap.
 
 **R8 – `sitemap.xml` & `robots.txt` generieren**  
 Given eine vollständige Seitenstruktur mit Slugs.  
@@ -100,7 +113,8 @@ Then erhalte ich eine ZIP-Datei inkl. `vercel.json` oder erforderlicher Vercel-E
 **R10 – KI-Assist in jedem Schritt**  
 Given ein aktueller Arbeitsschritt (Sitemap, Wireframe, Text).  
 When ich den KI-Assist öffne.  
-Then werden kontextbezogene Vorschläge angezeigt, die ich übernehmen oder ablehnen kann und die Historie speichert die Entscheidung.
+Then werden kontextbezogene Vorschläge angezeigt, die ich übernehmen oder ablehnen kann und die Historie speichert die
+Entscheidung.
 
 **R11 – Authentifizierung für den Generator**  
 Given das System ist deployed.  
