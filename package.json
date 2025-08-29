@@ -1,0 +1,13 @@
+{
+  "name": "website-generator-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r --if-present test",
+    "build": "pnpm -r --if-present build",
+    "dev": "pnpm --filter @wg/studio dev",
+    "typecheck": "pnpm -r --if-present typecheck"
+  }
+}
