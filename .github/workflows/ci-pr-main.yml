@@ -3,7 +3,6 @@ name: ci-pr-main
 on:
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -11,17 +10,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'   # uses pnpm-lock.yaml for cache-key
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 9
           run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Install dependencies (pnpm, frozen)
         run: pnpm install --frozen-lockfile
