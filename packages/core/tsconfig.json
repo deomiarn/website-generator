@@ -3,12 +3,14 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "types": [
-      "vitest/globals"
-    ]
+    "types": []
   },
   "include": [
-    "src",
-    "tests"
+    "src"
+  ],
+  "exclude": [
+    "tests",
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }
