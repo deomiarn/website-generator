@@ -40,7 +40,6 @@ describe('parseSitemap – unicode & auto-slug policy', () => {
       ],
     }
     expect(() => parseSitemap(bad as object)).toThrow(/duplicate slug/i)
-    // Alternativ (strenger): expect(() => parseSitemap(bad as object)).toThrow(ERRORS.DUPLICATE_SLUG('ueber'));
   })
 
   it('rejects whitespace-only slug literal (not home) when autoSlugFromTitle=false', () => {
