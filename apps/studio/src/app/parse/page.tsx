@@ -4,6 +4,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Alert } from '@/components/ui/alert'
+import type { Sitemap } from '@wg/core'
 
 const SAMPLE = `site:
   title: "Pizza Napoli"
@@ -19,11 +20,19 @@ pages:
     type: "contact"
 `
 
+type ErrorResponse = { error: string }
+
+function isErrorResponse(x: unknown): x is ErrorResponse {
+  if (typeof x !== 'object' || x === null) return false
+  const rec = x as Record<string, unknown>
+  return typeof rec.error === 'string'
+}
+
 export default function ParsePage() {
   const [input, setInput] = useState<string>(SAMPLE)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [result, setResult] = useState<any>(null)
+  const [result, setResult] = useState<Sitemap | null>(null)
 
   async function onParse() {
     setLoading(true)
@@ -31,11 +40,16 @@ export default function ParsePage() {
     setResult(null)
     try {
       const res = await fetch('/api/parse', { method: 'POST', body: input })
-      const json = await res.json()
-      if (!res.ok) throw new Error(json?.error || 'Parse failed')
-      setResult(json)
-    } catch (e: any) {
-      setError(e?.message ?? 'Unexpected error')
+      const json: unknown = await res.json()
+
+      if (!res.ok) {
+        const msg = isErrorResponse(json) ? json.error : 'Parse failed'
+        throw new Error(msg)
+      }
+
+      setResult(json as Sitemap)
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Unexpected error')
     } finally {
       setLoading(false)
     }
