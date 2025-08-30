@@ -2,6 +2,7 @@ import { parse as parseYaml } from 'yaml'
 import { SitemapInputSchema } from './schema/sitemap.schema'
 import type { Sitemap } from './types/sitemap.types'
 import { isAsciiKebab, toAsciiKebab } from './utils/slug'
+import { ERRORS } from './utils/errors'
 
 export interface ParseOptions {
   /** Only page[0] may have empty slug '' */
@@ -31,7 +32,7 @@ function stripOrder(input: unknown): unknown {
     const withPages = clone as { pages: Array<Record<string, unknown>> }
     withPages.pages = withPages.pages.map((p) => {
       if (p && typeof p === 'object') {
-        // build new object without the `order` key
+        // remove `order`
         return Object.fromEntries(Object.entries(p).filter(([k]) => k !== 'order')) as Record<
           string,
           unknown
@@ -61,9 +62,9 @@ function normalizeSlug(
   }
 
   if (empty) {
-    if (!opt.autoSlugFromTitle) throw new Error('pages.slug: non-home must have a slug')
+    if (!opt.autoSlugFromTitle) throw new Error(ERRORS.NON_HOME_EMPTY_SLUG)
     const gen = toAsciiKebab(title)
-    if (!gen) throw new Error('pages.slug: cannot generate slug from empty title')
+    if (!gen) throw new Error(ERRORS.CANNOT_AUTOGEN_FROM_EMPTY_TITLE)
     return gen
   }
 
@@ -79,7 +80,7 @@ export function parseSitemap(input: string | object, options?: ParseOptions): Si
 
   if (typeof input === 'string') {
     const raw = input.trim()
-    if (!raw) throw new Error('Input is neither valid YAML nor JSON')
+    if (!raw) throw new Error(ERRORS.INVALID_INPUT)
 
     // JSON-first if it starts with { or [
     const first = raw[0]
@@ -87,7 +88,7 @@ export function parseSitemap(input: string | object, options?: ParseOptions): Si
       try {
         data = JSON.parse(raw)
       } catch {
-        throw new Error('Input is neither valid YAML nor JSON')
+        throw new Error(ERRORS.INVALID_INPUT)
       }
     } else {
       // YAML, then JSON fallback
@@ -99,7 +100,7 @@ export function parseSitemap(input: string | object, options?: ParseOptions): Si
         try {
           data = JSON.parse(raw)
         } catch {
-          throw new Error('Input is neither valid YAML nor JSON')
+          throw new Error(ERRORS.INVALID_INPUT)
         }
       }
     }
@@ -121,10 +122,10 @@ export function parseSitemap(input: string | object, options?: ParseOptions): Si
     const slug = normalizeSlug(p.slug, title, i === 0, opt)
 
     if (opt.homepageEmptySlugOnly && i !== 0 && slug === '') {
-      throw new Error('pages: only the first page may have an empty slug')
+      throw new Error(ERRORS.ONLY_FIRST_PAGE_EMPTY)
     }
     if (opt.forceAsciiKebabOutput && slug !== '' && !isAsciiKebab(slug)) {
-      throw new Error(`pages.slug: not ascii-kebab after normalization "${slug}"`)
+      throw new Error(ERRORS.NOT_ASCII_KEBAB)
     }
     return { ...p, title, slug }
   })
@@ -132,7 +133,7 @@ export function parseSitemap(input: string | object, options?: ParseOptions): Si
   // 4) Duplicate slugs (ignore empty homepage slug)
   const nonEmpty = normalized.map((p) => p.slug).filter((s) => s !== '')
   const dup = nonEmpty.find((s, i) => nonEmpty.indexOf(s) !== i)
-  if (dup) throw new Error(`pages.slug: duplicate slug "${dup}"`)
+  if (dup) throw new Error(ERRORS.DUPLICATE_SLUG(dup))
 
   // 5) Assign order
   return { site, pages: normalized.map((p, i) => ({ ...p, order: i })) }

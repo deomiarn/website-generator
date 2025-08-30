@@ -1,5 +1,6 @@
 import type { Sitemap, SitemapInput } from '../src'
 import { parseSitemap } from '../src'
+import { ERRORS } from '../src/utils/errors'
 
 const yamlInput = `
 site:
@@ -53,11 +54,11 @@ describe('parseSitemap (happy + core errors)', () => {
   })
 
   it('handles empty YAML string input', () => {
-    expect(() => parseSitemap('')).toThrow(/neither valid YAML nor JSON/i)
+    expect(() => parseSitemap('')).toThrow(ERRORS.INVALID_INPUT)
   })
 
   it('handles malformed JSON string input', () => {
-    expect(() => parseSitemap('{bad json}')).toThrow(/neither valid YAML nor JSON/i)
+    expect(() => parseSitemap('{bad json}')).toThrow(ERRORS.INVALID_INPUT)
   })
 
   it('requires site.title (SEO)', () => {
@@ -82,7 +83,6 @@ describe('parseSitemap (happy + core errors)', () => {
   it('validates page type values', () => {
     const input: unknown = {
       site: { title: 'Test' },
-      // `invalid-type` ist absichtlich falsch → über unknown reinreichen
       pages: [{ slug: '', title: 'Invalid', type: 'invalid-type' }],
     }
     expect(() => parseSitemap(input as object)).toThrow()

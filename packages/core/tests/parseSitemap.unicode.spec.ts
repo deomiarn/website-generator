@@ -1,5 +1,6 @@
 import type { SitemapInput } from '../src'
 import { parseSitemap } from '../src'
+import { ERRORS } from '../src/utils/errors'
 
 describe('parseSitemap – unicode & auto-slug policy', () => {
   it('generates ASCII-kebab from unicode titles when non-home slug is empty/whitespace', () => {
@@ -25,7 +26,7 @@ describe('parseSitemap – unicode & auto-slug policy', () => {
       ],
     }
     expect(() => parseSitemap(bad, { autoSlugFromTitle: false })).toThrow(
-      /must have a slug|only the first page/i
+      ERRORS.NON_HOME_EMPTY_SLUG
     )
   })
 
@@ -39,6 +40,7 @@ describe('parseSitemap – unicode & auto-slug policy', () => {
       ],
     }
     expect(() => parseSitemap(bad as object)).toThrow(/duplicate slug/i)
+    // Alternativ (strenger): expect(() => parseSitemap(bad as object)).toThrow(ERRORS.DUPLICATE_SLUG('ueber'));
   })
 
   it('rejects whitespace-only slug literal (not home) when autoSlugFromTitle=false', () => {
@@ -50,7 +52,7 @@ describe('parseSitemap – unicode & auto-slug policy', () => {
       ],
     }
     expect(() => parseSitemap(bad, { autoSlugFromTitle: false })).toThrow(
-      /must have a slug|whitespace/i
+      ERRORS.NON_HOME_EMPTY_SLUG
     )
   })
 })
