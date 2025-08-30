@@ -1,15 +1,10 @@
 // eslint.config.mjs
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/.next/**',
-      '**/coverage/**'
-    ],
+    ignores: ['**/node_modules/**', '**/dist/**', '**/.next/**', '**/coverage/**'],
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -24,9 +19,11 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended, // non type-checked preset
+      'plugin:prettier/recommended',
     ],
     rules: {
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'prettier/prettier': 'warn',
     },
   }
-);
+)
