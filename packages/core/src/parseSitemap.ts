@@ -1,8 +1,10 @@
 import { parse as parseYaml } from 'yaml'
 import { SitemapInputSchema } from './schema/sitemap.schema'
 import type { Sitemap } from './types/sitemap.types'
-import { isAsciiKebab, toAsciiKebab } from './utils/slug'
+import { isAsciiKebab } from './utils/slug'
 import { ERRORS } from './utils/errors'
+import { normalizeSlug } from './policies/normalizeSlug'
+import { stripOrder } from './policies/stripOrder'
 
 export interface ParseOptions {
   /** Only page[0] may have empty slug '' */
@@ -17,59 +19,6 @@ const defaults: Required<ParseOptions> = {
   homepageEmptySlugOnly: true,
   autoSlugFromTitle: true,
   forceAsciiKebabOutput: true,
-}
-
-// deep clone and remove `order` on pages (idempotent)
-function stripOrder(input: unknown): unknown {
-  const clone = JSON.parse(JSON.stringify(input ?? {})) as unknown
-
-  if (
-    clone &&
-    typeof clone === 'object' &&
-    'pages' in (clone as Record<string, unknown>) &&
-    Array.isArray((clone as { pages?: unknown }).pages)
-  ) {
-    const withPages = clone as { pages: Array<Record<string, unknown>> }
-    withPages.pages = withPages.pages.map((p) => {
-      if (p && typeof p === 'object') {
-        // remove `order`
-        return Object.fromEntries(Object.entries(p).filter(([k]) => k !== 'order')) as Record<
-          string,
-          unknown
-        >
-      }
-      return p
-    })
-  }
-
-  return clone
-}
-
-// normalize slug with policy
-function normalizeSlug(
-  raw: string,
-  title: string,
-  isHome: boolean,
-  opt: Required<ParseOptions>
-): string {
-  const original = (raw ?? '').trim()
-  const empty = original === ''
-
-  if (isHome) {
-    if (empty) return ''
-    const ascii = toAsciiKebab(original)
-    return opt.forceAsciiKebabOutput ? ascii : original
-  }
-
-  if (empty) {
-    if (!opt.autoSlugFromTitle) throw new Error(ERRORS.NON_HOME_EMPTY_SLUG)
-    const gen = toAsciiKebab(title)
-    if (!gen) throw new Error(ERRORS.CANNOT_AUTOGEN_FROM_EMPTY_TITLE)
-    return gen
-  }
-
-  const ascii = toAsciiKebab(original)
-  return opt.forceAsciiKebabOutput ? ascii : original
 }
 
 export function parseSitemap(input: string | object, options?: ParseOptions): Sitemap {
