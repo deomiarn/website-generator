@@ -1,4 +1,5 @@
-[//]: # (Bug-Issue-Template)
+[//]: # 'Bug-Issue-Template'
+
 name: "Bug Report"
 about: "Fehlerbeschreibung"
 title: "fix: <kurzer Titel>"

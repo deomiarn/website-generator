@@ -1,10 +1,7 @@
-[//]: # (06 – Test Strategy)
-
-[//]: # (Zweck: Testebenen, Automatisierung und TDD-Vorgehen.)
-
-[//]: # (Inhalt: Unit, Integration, Smoke, CI-Triggers, Metriken, TDD.)
-
-[//]: # (Done: Klar, wann PRs „grün“ sind und wie TDD gelebt wird.)
+[//]: # '06 – Test Strategy'
+[//]: # 'Zweck: Testebenen, Automatisierung und TDD-Vorgehen.'
+[//]: # 'Inhalt: Unit, Integration, Smoke, CI-Triggers, Metriken, TDD.'
+[//]: # 'Done: Klar, wann PRs „grün“ sind und wie TDD gelebt wird.'
 
 # Test Strategy
 
@@ -31,4 +28,4 @@ Die CI blockiert Merges bei Fehlschlägen.
 
 Coverage für Unit liegt bei mindestens 70 Prozent.  
 Der Smoke-Test benötigt höchstens zwei Minuten.  
-Die Generationszeit eines Standardprojekts liegt unter dreissig Sekunden.  
+Die Generationszeit eines Standardprojekts liegt unter dreissig Sekunden.

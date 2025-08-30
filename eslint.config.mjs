@@ -1,28 +1,23 @@
+// eslint.config.mjs (Root, Flat Config, ESLint v9)
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
+import prettier from 'eslint-config-prettier'
+import prettierPlugin from 'eslint-plugin-prettier'
 
 export default tseslint.config(
-  {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/.next/**', '**/coverage/**'],
-  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
-      parser: tseslint.parser,
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+      parserOptions: {
+        project: ['./tsconfig.json', './packages/*/tsconfig.json'],
+      },
     },
-    plugins: {
-      '@typescript-eslint': tseslint.plugin,
-    },
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended, // non type-checked preset
-      'plugin:prettier/recommended',
-    ],
+    plugins: { prettier: prettierPlugin },
     rules: {
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      'prettier/prettier': 'warn',
+      'prettier/prettier': 'error',
     },
-  }
+  },
+  prettier
 )

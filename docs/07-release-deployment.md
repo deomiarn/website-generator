@@ -1,10 +1,7 @@
-[//]: # (07 – Release & Deployment)
-
-[//]: # (Zweck: Reproduzierbarer Auslieferungsprozess.)
-
-[//]: # (Inhalt: Branching, Versionierung, Artefakte, Environments.)
-
-[//]: # (Done: Stabiler Weg von Code zu Release.)
+[//]: # '07 – Release & Deployment'
+[//]: # 'Zweck: Reproduzierbarer Auslieferungsprozess.'
+[//]: # 'Inhalt: Branching, Versionierung, Artefakte, Environments.'
+[//]: # 'Done: Stabiler Weg von Code zu Release.'
 
 # Release & Deployment
 
@@ -29,4 +26,4 @@ Release Notes dokumentieren Änderungen kompakt.
 
 Entwicklung läuft lokal.  
 Preview wird über Preview-Tags ausgelöst.  
-Produktion wird über Stable-Tags ausgeliefert.  
+Produktion wird über Stable-Tags ausgeliefert.

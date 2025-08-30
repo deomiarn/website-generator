@@ -1,10 +1,7 @@
-[//]: # (04 – Architektur)
-
-[//]: # (Zweck: 80/20-Architekturbild + Technologie-Entscheide + Qualitätsmassnahmen.)
-
-[//]: # (Inhalt: Überblick, C4-Light, Daten-/Ablauf, Tech-Stack, Grenzen, ADR-Verweise.)
-
-[//]: # (Done: Leser versteht Hauptbausteine & Flüsse in 5 Minuten. Keine Implementierungsdetails.)
+[//]: # '04 – Architektur'
+[//]: # 'Zweck: 80/20-Architekturbild + Technologie-Entscheide + Qualitätsmassnahmen.'
+[//]: # 'Inhalt: Überblick, C4-Light, Daten-/Ablauf, Tech-Stack, Grenzen, ADR-Verweise.'
+[//]: # 'Done: Leser versteht Hauptbausteine & Flüsse in 5 Minuten. Keine Implementierungsdetails.'
 
 # Architektur
 
