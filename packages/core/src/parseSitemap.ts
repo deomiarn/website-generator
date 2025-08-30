@@ -20,16 +20,27 @@ const defaults: Required<ParseOptions> = {
 
 // deep clone and remove `order` on pages (idempotent)
 function stripOrder(input: unknown): unknown {
-  const clone = JSON.parse(JSON.stringify(input ?? {}))
-  if (clone && typeof clone === 'object' && Array.isArray((clone as any).pages)) {
-    ;(clone as any).pages = (clone as any).pages.map((p: any) => {
+  const clone = JSON.parse(JSON.stringify(input ?? {})) as unknown
+
+  if (
+    clone &&
+    typeof clone === 'object' &&
+    'pages' in (clone as Record<string, unknown>) &&
+    Array.isArray((clone as { pages?: unknown }).pages)
+  ) {
+    const withPages = clone as { pages: Array<Record<string, unknown>> }
+    withPages.pages = withPages.pages.map((p) => {
       if (p && typeof p === 'object') {
-        const { order, ...rest } = p
-        return rest
+        // build new object without the `order` key
+        return Object.fromEntries(Object.entries(p).filter(([k]) => k !== 'order')) as Record<
+          string,
+          unknown
+        >
       }
       return p
     })
   }
+
   return clone
 }
 

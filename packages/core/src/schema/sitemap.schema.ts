@@ -7,3 +7,6 @@ export const SitemapInputSchema = z
     pages: z.array(PageBaseSchema).min(1, 'pages required'),
   })
   .strict()
+
+export type SitemapInput = z.input<typeof SitemapInputSchema>
+export type SitemapValidated = z.output<typeof SitemapInputSchema>
