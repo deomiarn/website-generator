@@ -3,5 +3,5 @@ export default function Home() {
     <main>
       <div className="bg-red-300">Hello World</div>
     </main>
-  );
+  )
 }

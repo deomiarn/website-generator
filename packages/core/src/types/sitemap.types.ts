@@ -1,10 +1,10 @@
-import type { Page } from './page.types';
+import type { Page } from './page.types'
 
 export interface SiteMeta {
-  title: string;
+  title: string
 }
 
 export interface Sitemap {
-  site: SiteMeta;
-  pages: Page[];
+  site: SiteMeta
+  pages: Page[]
 }

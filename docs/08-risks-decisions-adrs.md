@@ -1,10 +1,7 @@
-[//]: # (08 – Risiken & Entscheidungen)
-
-[//]: # (Zweck: Risiken sichtbar machen und Technikentscheidungen nachverfolgen.)
-
-[//]: # (Inhalt: Risiken, ADR-Index, ADR-Template.)
-
-[//]: # (Done: Risiken adressiert, Entscheidungen verlinkt.)
+[//]: # '08 – Risiken & Entscheidungen'
+[//]: # 'Zweck: Risiken sichtbar machen und Technikentscheidungen nachverfolgen.'
+[//]: # 'Inhalt: Risiken, ADR-Index, ADR-Template.'
+[//]: # 'Done: Risiken adressiert, Entscheidungen verlinkt.'
 
 # Risiken und Entscheidungen
 
@@ -27,4 +24,4 @@ ADR-005 definiert den polyglotten Microservice in Phase 2.
 Kontext beschreibt den Anlass.  
 Entscheidung fixiert die Wahl.  
 Alternativen listen realistische Optionen.  
-Konsequenzen nennen positive und negative Effekte.  
+Konsequenzen nennen positive und negative Effekte.

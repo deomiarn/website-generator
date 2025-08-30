@@ -2,7 +2,7 @@ name: ci-pr-main
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 jobs:
   build-test:
     runs-on: ubuntu-latest

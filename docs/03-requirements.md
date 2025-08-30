@@ -1,10 +1,7 @@
-[//]: # (03 – Requirements)
-
-[//]: # (Zweck: Definiert, was das System können muss – fachlich und qualitativ.)
-
-[//]: # (Inhalt: Funktionale Anforderungen, nicht-funktionale Anforderungen, Akzeptanzkriterien.)
-
-[//]: # (Done: Jedes Requirement ist testbar oder durch ein Akzeptanzkriterium messbar.)
+[//]: # '03 – Requirements'
+[//]: # 'Zweck: Definiert, was das System können muss – fachlich und qualitativ.'
+[//]: # 'Inhalt: Funktionale Anforderungen, nicht-funktionale Anforderungen, Akzeptanzkriterien.'
+[//]: # 'Done: Jedes Requirement ist testbar oder durch ein Akzeptanzkriterium messbar.'
 
 ## Funktionale Anforderungen
 

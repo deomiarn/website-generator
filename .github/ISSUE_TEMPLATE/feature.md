@@ -1,4 +1,5 @@
-[//]: # (Feature-Issue-Template)
+[//]: # 'Feature-Issue-Template'
+
 name: "Feature Request"
 about: "User Story oder Feature aus dem Backlog"
 title: "feat: <kurzer Titel>"

@@ -1,10 +1,7 @@
-[//]: # (09 – Contributing & Coding Standards)
-
-[//]: # (Zweck: Verbindliche Arbeitsnormen für Code und PRs.)
-
-[//]: # (Inhalt: Code-Style, Commits, PR-Checklist, Ordnerstruktur.)
-
-[//]: # (Done: Jeder PR ist daran messbar.)
+[//]: # '09 – Contributing & Coding Standards'
+[//]: # 'Zweck: Verbindliche Arbeitsnormen für Code und PRs.'
+[//]: # 'Inhalt: Code-Style, Commits, PR-Checklist, Ordnerstruktur.'
+[//]: # 'Done: Jeder PR ist daran messbar.'
 
 # Contributing & Coding Standards
 
@@ -25,4 +22,4 @@ Commit-Texte sind kurz und präzise.
 Die CI ist grün.  
 Die Akzeptanzkriterien sind erfüllt.  
 README und Dokumentation sind aktuell.  
-Erforderliche ADRs wurden ergänzt oder angepasst.  
+Erforderliche ADRs wurden ergänzt oder angepasst.

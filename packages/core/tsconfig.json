@@ -5,12 +5,6 @@
     "outDir": "dist",
     "types": []
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "tests",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "include": ["src"],
+  "exclude": ["tests", "**/*.spec.ts", "**/*.test.ts"]
 }
