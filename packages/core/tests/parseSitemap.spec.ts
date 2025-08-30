@@ -1,4 +1,4 @@
-import type { Sitemap } from '../src'
+import type { Sitemap, SitemapInput } from '../src'
 import { parseSitemap } from '../src'
 
 const yamlInput = `
@@ -16,7 +16,7 @@ pages:
     type: "contact"
 `
 
-const jsonInput = {
+const jsonInput: SitemapInput = {
   site: { title: 'Pizza Napoli' },
   pages: [
     { slug: '', title: 'Home', type: 'landing' },
@@ -35,7 +35,7 @@ describe('parseSitemap (happy + core errors)', () => {
   })
 
   it('parses JSON object into the same structure', () => {
-    const r: Sitemap = parseSitemap(jsonInput as any)
+    const r: Sitemap = parseSitemap(jsonInput)
     expect(r.pages.map((p) => p.slug)).toEqual(['', 'menu', 'contact'])
   })
 
@@ -44,11 +44,11 @@ describe('parseSitemap (happy + core errors)', () => {
   })
 
   it('normalizes non-kebab slugs to kebab-case (no throw)', () => {
-    const bad = {
+    const bad: unknown = {
       site: { title: 'X' },
       pages: [{ slug: 'Bad Space', title: 'Oops', type: 'content' }],
     }
-    const r = parseSitemap(bad as any)
+    const r = parseSitemap(bad as object)
     expect(r.pages[0].slug).toBe('bad-space')
   })
 
@@ -61,12 +61,12 @@ describe('parseSitemap (happy + core errors)', () => {
   })
 
   it('requires site.title (SEO)', () => {
-    const input = { site: {} as any, pages: [{ slug: '', title: 'Home', type: 'landing' }] }
-    expect(() => parseSitemap(input)).toThrow(/site\.title/i)
+    const input: unknown = { site: {}, pages: [{ slug: '', title: 'Home', type: 'landing' }] }
+    expect(() => parseSitemap(input as object)).toThrow(/site\.title/i)
   })
 
   it('preserves input order for "order" field', () => {
-    const input = {
+    const input: SitemapInput = {
       site: { title: 'Test' },
       pages: [
         { slug: 'third', title: '3', type: 'content' },
@@ -80,30 +80,31 @@ describe('parseSitemap (happy + core errors)', () => {
   })
 
   it('validates page type values', () => {
-    const input = {
+    const input: unknown = {
       site: { title: 'Test' },
-      pages: [{ slug: '', title: 'Invalid', type: 'invalid-type' as any }],
+      // `invalid-type` ist absichtlich falsch → über unknown reinreichen
+      pages: [{ slug: '', title: 'Invalid', type: 'invalid-type' }],
     }
-    expect(() => parseSitemap(input)).toThrow()
+    expect(() => parseSitemap(input as object)).toThrow()
   })
 
   it('rejects array and null input', () => {
-    expect(() => parseSitemap([] as any)).toThrow()
-    expect(() => parseSitemap(null as any)).toThrow()
+    expect(() => parseSitemap([] as unknown as object)).toThrow()
+    expect(() => parseSitemap(null as unknown as object)).toThrow()
   })
 
   it('does not mutate the original input object', () => {
-    const input = {
+    const input: SitemapInput = {
       site: { title: 'X' },
       pages: [{ slug: '  spaced  ', title: '  T  ', type: 'content' }],
     }
     const clone = JSON.parse(JSON.stringify(input))
-    parseSitemap(input as any)
+    parseSitemap(input)
     expect(input).toEqual(clone)
   })
 
   it('is idempotent (parsing result again yields same slugs & order)', () => {
-    const input = {
+    const input: SitemapInput = {
       site: { title: 'X' },
       pages: [
         { slug: '', title: 'Home', type: 'landing' },
@@ -111,7 +112,7 @@ describe('parseSitemap (happy + core errors)', () => {
       ],
     }
     const r1 = parseSitemap(input)
-    const r2 = parseSitemap(r1 as any)
+    const r2 = parseSitemap(r1 as unknown as object)
     expect(r2.pages.map((p) => [p.slug, p.order])).toEqual(r1.pages.map((p) => [p.slug, p.order]))
   })
 })
